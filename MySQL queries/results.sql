@@ -23,6 +23,16 @@ SELECT *
 FROM `students`
 WHERE YEAR(CURRENT_DATE) - YEAR(`date_of_birth`) > 30;
 
+-- più preciso
+-- SPIEGAZIONE:
+-- 1. NOW() ci permette di ottenere la data odierna
+-- 2. DATEDIFF ci permette di ottenere la differenza in giorni tra 2 date
+-- 3. FROM_DAYS usato per ottenere i giorni di differenza in formato data, ad esempio 18615 giorni equivalgono a 0051-01-01 perchè sono 51 anni
+-- 4. DATE_FORMAT usato per prendere solo l'anno dalla data ottenuta
+-- 5. + 0 invece serve a trasformare la stringa con il risultato in numero in modo da togliere gli zeri di troppo 
+SELECT `id`, `name`, `date_of_birth`, DATE_FORMAT(FROM_DAYS(DATEDIFF(NOW(), `date_of_birth`)), '%Y') + 0 AS `age`
+FROM `students`;
+
 -- 4. Selezionare tutti i corsi del primo semestre del primo anno di un qualsiasi corso di laurea (286)
 SELECT *
 FROM `courses`
