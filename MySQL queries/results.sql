@@ -31,7 +31,8 @@ WHERE YEAR(CURRENT_DATE) - YEAR(`date_of_birth`) > 30;
 -- 4. DATE_FORMAT usato per prendere solo l'anno dalla data ottenuta
 -- 5. + 0 invece serve a trasformare la stringa con il risultato in numero in modo da togliere gli zeri di troppo 
 SELECT `id`, `name`, `date_of_birth`, DATE_FORMAT(FROM_DAYS(DATEDIFF(NOW(), `date_of_birth`)), '%Y') + 0 AS `age`
-FROM `students`;
+FROM `students`
+WHERE DATE_FORMAT(FROM_DAYS(DATEDIFF(NOW(), `date_of_birth`)), '%Y') + 0 > 30;
 
 -- 4. Selezionare tutti i corsi del primo semestre del primo anno di un qualsiasi corso di laurea (286)
 SELECT *
